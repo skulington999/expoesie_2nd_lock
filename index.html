@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>CLICK</title>
 
-<!-- Pixel font -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
@@ -20,7 +19,6 @@ html, body {
     justify-content: center;
 }
 
-/* BUTTON */
 #clickBtn {
     padding: 20px 40px;
     font-size: 16px;
@@ -28,7 +26,6 @@ html, body {
     background: black;
     border: 3px solid #00ffcc;
     cursor: pointer;
-    text-transform: uppercase;
     box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
     transition: all 0.2s ease;
 }
@@ -37,7 +34,6 @@ html, body {
     transform: scale(1.1);
 }
 
-/* DISAPPEAR ANIMATION */
 .fade-out {
     animation: fadeOut 0.3s forwards;
 }
@@ -49,7 +45,6 @@ html, body {
     }
 }
 
-/* CONGRATS TEXT */
 #message {
     position: absolute;
     font-size: 40px;
@@ -58,7 +53,6 @@ html, body {
     animation: rainbow 1s infinite, pulse 1s infinite;
 }
 
-/* rainbow effect */
 @keyframes rainbow {
     0% { color: red; }
     20% { color: orange; }
@@ -68,13 +62,11 @@ html, body {
     100% { color: magenta; }
 }
 
-/* pulse effect */
 @keyframes pulse {
     0%,100% { transform: scale(1); }
     50% { transform: scale(1.2); }
 }
 
-/* screen shake */
 .shake {
     animation: shake 0.4s;
 }
@@ -86,7 +78,6 @@ html, body {
     75% { transform: translate(-2px, 2px); }
     100% { transform: translate(0,0); }
 }
-
 </style>
 </head>
 
@@ -95,7 +86,6 @@ html, body {
 <button id="clickBtn">CLICK</button>
 <div id="message">CONGRATULATIONS!</div>
 
-<!-- confetti library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
@@ -103,41 +93,36 @@ html, body {
 const btn = document.getElementById("clickBtn");
 const message = document.getElementById("message");
 
-// ⚠️ remplace ce lien audio par le tien
-const audio = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
+// ⚠️ Le fichier doit être dans le même repo que ton index.html
+const audio = new Audio("silent hill sfx.wav");
 
-// ⚠️ remplace ce lien par ta destination
-const redirectURL = "https://example.com";
+// 🔗 lien final
+const redirectURL = "https://untitled.stream/library/project/HblZE61SGSyDlyiGmc5tv";
 
 btn.addEventListener("click", () => {
 
-    // bouton disparaît
     btn.classList.add("fade-out");
-
-    // shake écran
     document.body.classList.add("shake");
 
     setTimeout(() => {
         btn.style.display = "none";
     }, 300);
 
-    // confetti explosion
     confetti({
         particleCount: 200,
         spread: 120,
         origin: { y: 0.6 }
     });
 
-    // musique
-    audio.play();
-
-    // afficher message
     message.style.display = "block";
 
-    // redirection après 5s
-    setTimeout(() => {
+    // 🔊 jouer le son
+    audio.play();
+
+    // 🔁 redirection à la FIN du son
+    audio.onended = () => {
         window.location.href = redirectURL;
-    }, 5000);
+    };
 
 });
 
