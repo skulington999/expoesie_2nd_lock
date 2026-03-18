@@ -129,8 +129,11 @@ btn.addEventListener("click", () => {
     // afficher message
     message.style.display = "block";
 
-    // jouer audio
-    audio.play();
+    // jouer audio **après qu'il soit chargé**
+    audio.addEventListener("canplaythrough", () => {
+        audio.play();
+    });
+    audio.load(); // force le chargement
 
     // rediriger à la fin du son
     audio.onended = () => {
